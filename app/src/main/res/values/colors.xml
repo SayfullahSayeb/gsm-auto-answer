@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <color name="brand_primary">#185A9D</color>
+    <color name="brand_on_primary">#FFFFFF</color>
+    <color name="brand_container">#E8F1FA</color>
+    <color name="on_brand_container">#0C3A66</color>
+
+    <!-- Surfaces and text -->
+    <color name="screen_bg">#F4F7FB</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="card_stroke">#E1E8F0</color>
+    <color name="divider">#E7EDF4</color>
+    <color name="ink">#172333</color>
+    <color name="text_muted">#5E6E82</color>
+    <color name="nav_inactive">#74839A</color>
+    <color name="chip_bg">#EDF4FB</color>
+    <color name="switch_track_off">#D6E0EC</color>
+    <color name="switch_thumb_on">#FFFFFF</color>
+    <color name="switch_thumb_off">#7A8BA0</color>
+
+    <!-- Status -->
+    <color name="status_good">#18794E</color>
+    <color name="status_warn">#9A6700</color>
+    <color name="status_bad">#B42318</color>
+    <color name="status_bad_bg">#FDECEA</color>
+    <color name="warning_amber">#C88A00</color>
+
+    <!-- Call screen -->
+    <color name="call_bg">#08111F</color>
+    <color name="call_surface">#122033</color>
+    <color name="call_text">#F2F6FB</color>
+    <color name="call_text_secondary">#A9B7C9</color>
+    <color name="unmute_green">#35C98D</color>
+    <color name="on_unmute_green">#04150E</color>
+    <color name="end_red">#E5484D</color>
+    <color name="call_error_container">#3A1B1B</color>
+    <color name="call_warning_container">#362C15</color>
+    <color name="call_chip_bg">#17304D</color>
+
+    <color name="ic_launcher_background">#124B85</color>
+</resources>

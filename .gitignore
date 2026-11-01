@@ -1,0 +1,36 @@
+# Gradle and Android build output
+.gradle/
+.kotlin/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.hprof
+
+# Local toolchains and research (not part of the app)
+.tools/
+.research/
+
+# Signing material
+*.keystore
+*.jks
+keystore.properties
+signing.properties
+
+# Release artifacts
+dist/
+app/release/
+*.apk
+*.aab
+*.zip
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

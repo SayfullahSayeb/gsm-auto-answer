@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialer_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dialer_title"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/setup_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialer_setup"
+            android:textAllCaps="false"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="12dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="88dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/dial_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="34sp"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/dial_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/dialer_hint"
+                    android:textColor="@color/text_muted"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/dial_backspace"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/backspace"
+                android:padding="12dp"
+                android:src="@drawable/ic_backspace"
+                app:tint="?attr/colorOnSurface" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keypad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="2" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="4" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="5" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="7" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="8" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="*" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:text="0" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.GsmAutoAnswer.DialKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:text="#" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dial_call"
+            style="@style/Theme.GsmAutoAnswer.Call.Button.Answer"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="@string/dialer_call"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="72dp"
+            app:cornerRadius="36dp"
+            app:icon="@drawable/ic_phone"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="30dp"
+            app:iconTint="@color/on_unmute_green" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="@string/dialer_note"
+            android:textColor="@color/text_muted"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

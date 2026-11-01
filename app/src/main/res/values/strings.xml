@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GSM Auto-Answer</string>
+    <string name="unknown_caller">Unknown caller</string>
+
+    <!-- Dashboard -->
+    <string name="answer_immediately">immediate</string>
+    <string name="answer_delay_seconds">%1$d-second</string>
+
+    <!-- Audio settings -->
+    <string name="audio_screen_title">Caller audio</string>
+    <string name="audio_intro">The message plays once, then waiting music loops until you unmute.</string>
+    <string name="greeting_label">Custom message</string>
+    <string name="greeting_help">Plays once after answering.</string>
+    <string name="hold_label">Waiting music</string>
+    <string name="hold_help">Loops until you unmute.</string>
+    <string name="choose_file">Choose audio file</string>
+    <string name="replace_file">Replace file</string>
+    <string name="file_not_selected">No file selected</string>
+    <string name="decoding_audio">Decoding audio…</string>
+    <string name="decoded_audio">%1$s · %2$s</string>
+    <string name="decode_failed">Could not use this file: %1$s</string>
+    <string name="audio_required">Both files are required before auto-answer.</string>
+    <string name="audio_format_note">Decoded locally. MP3, M4A, OGG and WAV are supported.</string>
+    <string name="audio_screen_pick_failed">The file picker could not open.</string>
+    <string name="audio_not_prepared">Selected, but not prepared yet</string>
+    <string name="role_unavailable">This ROM does not expose the phone-app role picker. Open system settings and set this app as the default phone app.</string>
+    <string name="notification_settings_unavailable">Notification settings could not be opened.</string>
+    <string name="battery_settings_unavailable">Battery settings could not be opened.</string>
+
+    <!-- Call flow settings -->
+    <string name="flow_screen_title">Call flow</string>
+    <string name="flow_intro">Answer, play, hold, then unmute or end.</string>
+    <string name="enable_auto_answer">Enable auto-answer</string>
+    <string name="enable_auto_answer_help">Only SIM calls are auto-answered. A blocked call keeps ringing.</string>
+    <string name="countdown_label">Unmute window</string>
+    <string name="countdown_help">Starts after the message. No Unmute in time ends the call.</string>
+    <string name="countdown_value">%1$d seconds</string>
+    <string name="delay_label">Answer delay</string>
+    <string name="delay_help">Wait before answering. Zero answers instantly.</string>
+    <string name="delay_value_immediate">Immediately</string>
+    <string name="delay_value">%1$d seconds</string>
+
+    <!-- Call screen -->
+    <string name="incoming_call">Incoming call</string>
+    <string name="auto_answering">Auto-answering…</string>
+    <string name="preparing_caller_audio">Preparing caller audio…</string>
+    <string name="preparing_detail">The call is ringing while the app prepares the audio. Answering happens when ready.</string>
+    <string name="answering">Answering…</string>
+    <string name="playing_message">Playing your message</string>
+    <string name="playing_message_detail">The caller hears your custom message. Your microphone is muted.</string>
+    <string name="hold_screen_title">Waiting music</string>
+    <string name="hold_screen_detail">Press Unmute within %1$d seconds to talk. Otherwise the call ends automatically.</string>
+    <string name="unmute">Unmute</string>
+    <string name="mic_live">Microphone live</string>
+    <string name="in_call">In call</string>
+    <string name="calling">Calling…</string>
+    <string name="ending_call">Ending call…</string>
+    <string name="call_ended">Call ended</string>
+    <string name="answer">Answer</string>
+    <string name="decline">Decline</string>
+    <string name="end_call">End call</string>
+    <string name="auto_answer_blocked">Auto-answer blocked</string>
+    <string name="answer_normally_hint">You can answer normally, but caller audio will not be injected.</string>
+    <string name="route_verified">Telephony uplink route verified</string>
+    <string name="route_unverified">Caller audio route not verified</string>
+    <string name="countdown_seconds">%1$d</string>
+    <string name="countdown_seconds_label">seconds</string>
+    <string name="call_ended_remote">The caller ended the call.</string>
+    <string name="call_ended_user">You ended the call.</string>
+    <string name="call_ended_timeout">No Unmute within the unmute window, so the call was ended.</string>
+    <string name="call_ended_injection">Caller audio could not continue, so the call was ended.</string>
+    <string name="call_ended_answer">The call could not be answered.</string>
+    <string name="call_back_disabled">Use Unmute or End call. The call screen stays visible until the session ends.</string>
+    <string name="call_screen_waiting">Waiting for the call…</string>
+    <string name="call_passive_note">Outgoing or non-SIM call. Caller audio is not injected.</string>
+    <string name="call_manual_note">Manual answer. Caller audio is not injected.</string>
+
+    <!-- Notifications -->
+    <string name="channel_calls">Calls</string>
+    <string name="channel_calls_description">Incoming and ongoing call sessions.</string>
+    <string name="channel_alerts">Alerts</string>
+    <string name="channel_alerts_description">Caller-audio and setup problems.</string>
+    <string name="notif_incoming_text">%1$s is calling</string>
+    <string name="notif_incoming_auto_text">Auto-answering %1$s</string>
+    <string name="notif_preparing_text">Preparing caller audio for %1$s</string>
+    <string name="notif_blocked_text">Auto-answer blocked · %1$s</string>
+    <string name="notif_answering_title">Answering…</string>
+    <string name="notif_greeting_title">Playing your message</string>
+    <string name="notif_greeting_text">Mic muted · %1$s</string>
+    <string name="notif_hold_title">Waiting music</string>
+    <string name="notif_hold_text">Unmute within %1$d s · %2$s</string>
+    <string name="notif_calling_title">Calling…</string>
+    <string name="notif_in_call_title">In call</string>
+    <string name="notif_in_call_text">%1$s · microphone live</string>
+    <string name="notif_ending_title">Ending call…</string>
+    <string name="notif_error_title">Caller audio problem</string>
+    <string name="notif_declined_title">Second call declined</string>
+    <string name="notif_declined_text">A session is already active, so another incoming call was declined. Only one caller uplink can be injected at a time.</string>
+
+    <!-- Diagnostics -->
+    <string name="diagnostics_screen_title">Diagnostics</string>
+    <string name="diagnostics_intro">On-device report and last session log.</string>
+    <string name="diagnostics_refresh">Run checks</string>
+    <string name="diagnostics_copy">Copy</string>
+    <string name="diagnostics_share">Share</string>
+    <string name="diagnostics_copied">Report copied.</string>
+    <string name="diagnostics_running">Running checks…</string>
+    <string name="diagnostics_report_title">Capability report</string>
+    <string name="diagnostics_log_title">Last session log</string>
+    <string name="diagnostics_share_subject">GSM Auto-Answer diagnostics</string>
+    <string name="diagnostics_no_log">No session events have been recorded yet.</string>
+
+    <!-- Dialer -->
+    <string name="dialer_title">Dialer</string>
+    <string name="dialer_hint">Enter a number</string>
+    <string name="dialer_call">Call</string>
+    <string name="dialer_setup">Setup</string>
+    <string name="dialer_empty">Enter a number first.</string>
+    <string name="dialer_permission_needed">Call permission is needed to place outgoing calls.</string>
+    <string name="dialer_note">Emergency numbers are placed through the system call path.</string>
+    <string name="dialer_call_failed">The call could not be placed.</string>
+    <string name="backspace">Backspace</string>
+
+    <!-- Device compatibility -->
+    <string name="compat_copy">Copy</string>
+    <string name="compat_share">Share</string>
+    <string name="compat_copied">Report copied.</string>
+    <string name="compat_verdict_unknown">Unknown</string>
+    <string name="compat_verdict_verified">Supported — caller confirmed</string>
+    <string name="compat_verdict_likely">Likely supported</string>
+    <string name="compat_verdict_framework">Framework only</string>
+    <string name="compat_verdict_no">Not supported</string>
+    <string name="compat_verdict_candidate">Unconfirmed</string>
+    <string name="compat_verdict_test_failed">Failed live test</string>
+    <string name="compat_verdict_inconclusive">Inconclusive</string>
+    <string name="compat_summary_verified">Caller heard the tone. This phone works.</string>
+    <string name="compat_summary_likely">Route evidence found. Confirm with a live call.</string>
+    <string name="compat_summary_framework">Framework route only — caller audio is likely dropped.</string>
+    <string name="compat_summary_no">No telephony uplink route on this ROM.</string>
+    <string name="compat_summary_candidate">Route found, vendor layer unreadable. Run the live test.</string>
+    <string name="compat_summary_test_failed">Route reached, caller heard nothing. The modem dropped the audio.</string>
+    <string name="compat_summary_inconclusive">Uplink not verified. This is not a pass.</string>
+    <string name="compat_summary_unknown">Policy unreadable. Start Shizuku or run the live test.</string>
+    <string name="compat_shizuku_not_installed">Not installed · optional</string>
+    <string name="compat_shizuku_not_running">Not running</string>
+    <string name="compat_shizuku_permission">Permission needed</string>
+    <string name="compat_shizuku_ready">Connected</string>
+    <string name="compat_shizuku_request">Grant access</string>
+    <string name="compat_shizuku_setup">Apply setup</string>
+    <string name="compat_shizuku_open">Open app</string>
+    <string name="compat_shizuku_open_failed">Shizuku could not be opened.</string>
+    <string name="compat_shizuku_setup_running">Applying…</string>
+    <string name="compat_shizuku_setup_confirm_title">Apply setup</string>
+    <string name="compat_shizuku_setup_confirm_body">Shizuku will grant phone permissions, set this app as the default phone app, allow full-screen call alerts and exempt the app from battery optimization. You can undo this in system settings.</string>
+    <string name="compat_shizuku_setup_confirm_action">Apply</string>
+    <string name="compat_shizuku_setup_title">Setup output</string>
+    <string name="compat_shizuku_setup_failed">Shizuku setup could not run.</string>
+    <string name="compat_live_need_role">Set this app as the default phone app first.</string>
+    <string name="compat_live_need_role_action">Open role request</string>
+    <string name="compat_live_setup_hint">Allow notifications and phone access for the test.</string>
+    <string name="compat_report_empty">Run a scan to collect evidence.</string>
+
+    <!-- SIM selection -->
+    <string name="sim_screen_title">SIM selection</string>
+    <string name="sim_intro">Only the selected SIM is auto-answered. Other SIMs still ring.</string>
+    <string name="sim_all_title">All SIMs</string>
+    <string name="sim_all_description">Auto-answer on any active SIM.</string>
+    <string name="sim_option_title">SIM %1$d · %2$s</string>
+    <string name="sim_option_description">%1$s · slot %2$d</string>
+    <string name="sim_unknown_carrier">Unknown carrier</string>
+    <string name="sim_unknown_name">SIM</string>
+    <string name="sim_permission_title">Phone permission needed</string>
+    <string name="sim_permission_body">Allow phone access to list SIMs.</string>
+    <string name="sim_permission_action">Allow phone access</string>
+    <string name="sim_empty">No active SIMs found. Insert a SIM and try again.</string>
+    <string name="sim_saved">SIM selection saved.</string>
+    <string name="sim_stale">Saved SIM is inactive. Pick an active SIM.</string>
+    <string name="sim_refresh">Refresh SIM list</string>
+
+    <!-- Generic -->
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <!-- Main navigation -->
+    <string name="nav_home">Overview</string>
+    <string name="nav_check">Device check</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Home -->
+    <string name="home_page_title">Overview</string>
+    <string name="home_page_subtitle">Call attendant status and quick actions.</string>
+    <string name="home_master_title">Auto-answer</string>
+    <string name="home_master_on">On · matching SIM calls are answered</string>
+    <string name="home_master_off">Off · auto-answer is paused</string>
+    <string name="home_setup_warning">Setup is incomplete. Auto-answer stays blocked.</string>
+    <string name="home_audio_unverified_warning">Caller audio isn\'t verified. Run the live call test.</string>
+    <string name="home_quick_title">Quick actions</string>
+    <string name="home_tile_check">Device check</string>
+    <string name="home_tile_audio">Caller audio</string>
+    <string name="home_tile_sim">SIM</string>
+    <string name="home_tile_flow">Call flow</string>
+    <string name="home_check_not_tested">Not tested</string>
+    <string name="home_check_passed">Passed</string>
+    <string name="home_check_failed">Failed</string>
+    <string name="home_check_armed">Test armed</string>
+    <string name="home_audio_ready">Ready</string>
+    <string name="home_audio_missing">Set up</string>
+    <string name="home_sim_all">All SIMs</string>
+    <string name="home_flow_value">%1$d s window</string>
+    <string name="home_setup_title">Finish setup</string>
+    <plurals name="home_setup_tasks">
+        <item quantity="one">%1$d task remaining</item>
+        <item quantity="other">%1$d tasks remaining</item>
+    </plurals>
+
+    <!-- Device check -->
+    <string name="check_page_title">Device check</string>
+    <string name="check_page_subtitle">Confirm that callers can hear the attendant on this phone.</string>
+    <string name="check_scan">Run check</string>
+    <string name="check_scanning">Checking…</string>
+    <string name="check_details">Technical details</string>
+    <string name="check_show">Show</string>
+    <string name="check_hide">Hide</string>
+    <string name="check_device_line">%1$s · Android %2$s</string>
+    <string name="check_live_title">Live call test</string>
+    <string name="check_live_body">Arm the test, then call this phone from another phone. The caller hears a beep, then hold music.</string>
+    <string name="check_live_arm">Arm for 30 minutes</string>
+    <string name="check_live_disarm">Disarm test</string>
+    <string name="check_live_armed">Armed · %1$d min left. Call this phone now.</string>
+    <string name="check_live_not_run">No live test yet.</string>
+    <string name="check_live_last">Last test %1$s · route %2$s%3$s</string>
+    <string name="check_live_route_ok">verified</string>
+    <string name="check_live_route_none">not reached</string>
+    <string name="check_live_ask">Did the caller hear the test tone?</string>
+    <string name="check_live_yes">Yes, heard it</string>
+    <string name="check_live_no">No, silence</string>
+    <string name="check_live_note">Judge only from the caller\'s phone, never this speaker.</string>
+    <string name="check_live_disarmed">Test disarmed.</string>
+    <string name="check_live_passed_toast">Test passed.</string>
+    <string name="check_live_failed_toast">Test failed.</string>
+    <string name="check_sim_title">Preferred SIM</string>
+    <string name="check_sim_all">All SIMs</string>
+    <string name="check_sim_selected">Selected SIM</string>
+    <string name="check_shizuku_title">Deep scan</string>
+
+    <!-- Settings -->
+    <string name="settings_page_title">Settings</string>
+    <string name="settings_page_subtitle">Manage access, call handling and appearance.</string>
+    <string name="settings_section_access">Phone access</string>
+    <string name="settings_section_calls">Call handling</string>
+    <string name="settings_section_advanced">Advanced</string>
+    <string name="settings_section_about">About</string>
+    <string name="settings_role_title">Default phone app</string>
+    <string name="settings_role_ready">Active</string>
+    <string name="settings_role_missing">Required to answer calls</string>
+    <string name="settings_role_action">Set</string>
+    <string name="settings_notifications_title">Notifications</string>
+    <string name="settings_notifications_ready">Allowed</string>
+    <string name="settings_notifications_missing">Required for call alerts</string>
+    <string name="settings_notifications_action">Allow</string>
+    <string name="settings_battery_title">Battery optimization</string>
+    <string name="settings_battery_ready">Exempt</string>
+    <string name="settings_battery_missing">Prevents call interruptions</string>
+    <string name="settings_battery_action">Exempt</string>
+    <string name="settings_sim_title">SIM for auto-answer</string>
+    <string name="settings_audio_title">Caller audio</string>
+    <string name="settings_audio_ready">Message and hold music ready</string>
+    <string name="settings_audio_missing">Choose message and hold music</string>
+    <string name="settings_flow_title">Call flow</string>
+    <string name="settings_flow_value">%1$d s window · %2$s answer</string>
+    <string name="settings_diagnostics_title">Diagnostics</string>
+    <string name="settings_diagnostics_summary">System report and session log</string>
+    <string name="settings_dialer_title">Dialer</string>
+    <string name="settings_dialer_summary">Open the dialer</string>
+    <string name="settings_appearance_title">Appearance</string>
+    <string name="settings_about_title">About and privacy</string>
+    <string name="settings_about_version">Version %1$s</string>
+    <string name="settings_privacy_footer">No internet permission. Audio and settings stay on this device.</string>
+    <string name="appearance_dialog_title">Appearance</string>
+    <string name="appearance_light">Light</string>
+    <string name="appearance_dark">Dark</string>
+    <string name="appearance_system">System</string>
+    <string name="about_title">About GSM Auto-Answer</string>
+    <string name="about_message">Version %1$s\n\nNo internet permission. No analytics. Audio and settings stay on this device.\n\nSource: github.com/SayfullahSayeb/gsm-auto-answer</string>
+    <string name="about_view_source">View source</string>
+</resources>
