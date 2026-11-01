@@ -19,8 +19,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      HAS_SIGNING_KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' }}
 
     steps:
       - name: Check out source
@@ -48,41 +46,50 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
 
+      - name: Detect signing key
+        id: signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 || secrets.RELEASE_KEYSTORE }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+            echo "Release signing key detected."
+          else
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "No release signing key configured; this run will use a debug build."
+          fi
+
       - name: Run unit tests
         run: ./gradlew test
 
-      - name: Decode release keystore
-        if: env.HAS_SIGNING_KEY == 'true'
-        env:
-          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-        run: |
-          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
-
       - name: Build signed release APK
-        if: env.HAS_SIGNING_KEY == 'true'
+        if: steps.signing.outputs.signed == 'true'
         env:
           RELEASE_KEYSTORE_PATH: ${{ runner.temp }}/release.keystore
-          RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD || secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS || secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD || secrets.RELEASE_KEY_PASSWORD }}
         run: ./gradlew assembleRelease
 
       - name: Restore debug keystore
-        if: env.HAS_SIGNING_KEY != 'true'
+        if: steps.signing.outputs.signed != 'true'
         uses: actions/cache@v4
         with:
           path: ~/.android/debug.keystore
           key: gsm-auto-answer-debug-keystore-v1
 
       - name: Build debug APK
-        if: env.HAS_SIGNING_KEY != 'true'
+        if: steps.signing.outputs.signed != 'true'
         run: ./gradlew assembleDebug
 
       - name: Prepare release files
+        env:
+          SIGNED: ${{ steps.signing.outputs.signed }}
         run: |
           VERSION=$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts)
           mkdir -p release
-          if [ "$HAS_SIGNING_KEY" = "true" ]; then
+          if [ "$SIGNED" = "true" ]; then
             SOURCE="app/build/outputs/apk/release/app-release.apk"
             ASSET="gsm-auto-answer-${VERSION}.apk"
           else
