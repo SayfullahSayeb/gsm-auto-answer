@@ -6,6 +6,11 @@ can unmute and talk or let the call end automatically.
 
 Built with Kotlin and Material 3 for Android 10 and newer.
 
+## Download
+
+Install the latest APK from the
+[GitHub releases](https://github.com/SayfullahSayeb/gsm-auto-answer/releases/latest).
+
 ## Features
 
 - **Automatic answering** for all SIMs or one selected SIM, with an optional answer delay.
@@ -65,6 +70,33 @@ policy-tree selection and the audio resampler.
 
 For a release build, use your own signing key. Never commit keystores or
 `local.properties` to the repository.
+
+## Releases
+
+Pushing a version tag runs the release workflow and publishes the APK:
+
+```bash
+git tag v2.0.0
+git push origin v2.0.0
+```
+
+The workflow runs the unit tests, builds the APK and attaches it with a
+`SHA256SUMS.txt` file to the GitHub release. A manual workflow run uploads the
+APK as a workflow artifact without creating a release.
+
+To publish a signed release instead of a debug-signed test APK, add these
+repository secrets under **Settings → Secrets and variables → Actions**:
+
+| Secret | Value |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | Base64 of the release keystore file |
+| `ANDROID_KEYSTORE_PASSWORD` | Keystore password |
+| `ANDROID_KEY_ALIAS` | Key alias |
+| `ANDROID_KEY_PASSWORD` | Key password |
+
+Keep the keystore and passwords backed up outside the repository. Without the
+secrets, the workflow attaches a debug-signed APK and a newer build may require
+uninstalling the previous version first.
 
 ## Permissions
 
