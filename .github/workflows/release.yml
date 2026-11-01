@@ -115,7 +115,7 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
 
-      - name: Build signed release APK
+      - name: Build signed release APKs
         if: steps.signing.outputs.signed == 'true'
         run: ./gradlew assembleRelease
 
@@ -126,7 +126,7 @@ jobs:
           path: ~/.android/debug.keystore
           key: gsm-auto-answer-debug-keystore-v1
 
-      - name: Build debug APK
+      - name: Build debug APKs
         if: steps.signing.outputs.signed != 'true'
         run: ./gradlew assembleDebug
 
@@ -137,14 +137,19 @@ jobs:
           VERSION=$(sed -n 's/.*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts)
           mkdir -p release
           if [ "$SIGNED" = "true" ]; then
-            SOURCE="app/build/outputs/apk/release/app-release.apk"
-            ASSET="gsm-auto-answer-${VERSION}.apk"
+            FULL="app/build/outputs/apk/full/release/app-full-release.apk"
+            LITE="app/build/outputs/apk/lite/release/app-lite-release.apk"
+            FULL_ASSET="gsm-auto-answer-${VERSION}.apk"
+            LITE_ASSET="gsm-call-check-${VERSION}.apk"
           else
-            SOURCE="app/build/outputs/apk/debug/app-debug.apk"
-            ASSET="gsm-auto-answer-${VERSION}-debug.apk"
+            FULL="app/build/outputs/apk/full/debug/app-full-debug.apk"
+            LITE="app/build/outputs/apk/lite/debug/app-lite-debug.apk"
+            FULL_ASSET="gsm-auto-answer-${VERSION}-debug.apk"
+            LITE_ASSET="gsm-call-check-${VERSION}-debug.apk"
           fi
-          cp "$SOURCE" "release/$ASSET"
-          (cd release && sha256sum "$ASSET" > SHA256SUMS.txt)
+          cp "$FULL" "release/$FULL_ASSET"
+          cp "$LITE" "release/$LITE_ASSET"
+          (cd release && sha256sum "$FULL_ASSET" "$LITE_ASSET" > SHA256SUMS.txt)
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
@@ -159,9 +164,16 @@ jobs:
         with:
           files: |
             release/gsm-auto-answer-*.apk
+            release/gsm-call-check-*.apk
             release/SHA256SUMS.txt
           generate_release_notes: true
           body: |
+            **Download**
+            - `gsm-auto-answer-*.apk` — full auto-answer app.
+            - `gsm-call-check-*.apk` — lightweight checker with only the device
+              scan and the live caller-audio test.
+            - `SHA256SUMS.txt` — checksums for both APKs.
+
             GSM Auto-Answer is a local call attendant for SIM calls: it answers,
             plays your message, loops hold music, then opens a timed Unmute window.
 

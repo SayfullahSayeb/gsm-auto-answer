@@ -8,8 +8,25 @@ Built with Kotlin and Material 3 for Android 10 and newer.
 
 ## Download
 
-Install the latest APK from the
-[GitHub releases](https://github.com/SayfullahSayeb/gsm-auto-answer/releases/latest).
+Get both apps from the
+[latest release](https://github.com/SayfullahSayeb/gsm-auto-answer/releases/latest):
+
+- `gsm-auto-answer-<version>.apk` — the full auto-answer call attendant.
+- `gsm-call-check-<version>.apk` — a lightweight checker that only reports whether a
+  phone can send caller audio.
+
+## GSM Call Check
+
+A separate, minimal app for testing a phone before installing or buying the full app.
+It contains only:
+
+- a one-button device scan with a clear supported/not-supported verdict, and
+- the live call test: arm the test, call the phone from another phone, and confirm
+  whether the caller heard the tone.
+
+It has no auto-answer dashboard, message or music settings, call-flow controls,
+diagnostics screens or SIM picker. It installs alongside the full app as
+`com.gsmautoanswer.lite` and never enables normal auto-answering.
 
 ## Features
 
@@ -56,10 +73,14 @@ Requirements:
 - A connected device or emulator with telephony for runtime testing
 
 ```bash
-./gradlew assembleDebug
+./gradlew assembleDebug        # builds the full and lite debug APKs
+./gradlew assembleRelease      # builds both release variants
 ```
 
-The debug APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
+The debug APKs are written to:
+
+- full: `app/build/outputs/apk/full/debug/app-full-debug.apk`
+- lite: `app/build/outputs/apk/lite/debug/app-lite-debug.apk`
 
 ```bash
 ./gradlew test
@@ -73,16 +94,16 @@ For a release build, use your own signing key. Never commit keystores or
 
 ## Releases
 
-Pushing a version tag runs the release workflow and publishes the APK:
+Pushing a version tag runs the release workflow and publishes both APKs:
 
 ```bash
-git tag v2.0.0
-git push origin v2.0.0
+git tag v2.1.0
+git push origin v2.1.0
 ```
 
-The workflow runs the unit tests, builds the APK and attaches it with a
-`SHA256SUMS.txt` file to the GitHub release. A manual workflow run uploads the
-APK as a workflow artifact without creating a release.
+The workflow runs the unit tests, builds the full and lite APKs, and attaches
+both with a `SHA256SUMS.txt` file to the GitHub release. A manual workflow run
+uploads the APKs as a workflow artifact without creating a release.
 
 To publish a signed release instead of a debug-signed test APK, add these
 repository secrets under **Settings → Secrets and variables → Actions**:
@@ -138,9 +159,9 @@ The verdict and the live result are used to decide whether auto-answer may run.
 
 ## Privacy
 
-The app has no `INTERNET` permission, no analytics, no ads and no accounts. All data stays
-in the app's private storage and is removed when the app is uninstalled. See
-[PRIVACY.md](PRIVACY.md) for details.
+The full app and GSM Call Check have no `INTERNET` permission, no analytics, no ads and no
+accounts. All data stays in each app's private storage and is removed when the app is
+uninstalled. See [PRIVACY.md](PRIVACY.md) for details.
 
 ## Project structure
 
@@ -154,6 +175,7 @@ app/src/main/java/com/gsmautoanswer/app/
   shizuku/      optional Shizuku integration
   telecom/      InCallService and call session manager
   ui/           main shell, call UI, device check, settings
+app/src/lite/   GSM Call Check flavor: launcher, strings and manifest
 ```
 
 ## License

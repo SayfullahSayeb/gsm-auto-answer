@@ -210,6 +210,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/live_sim_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="14dp"
@@ -283,6 +284,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/technical_card"
             style="@style/Widget.GsmAutoAnswer.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -376,6 +378,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/shizuku_card"
             style="@style/Widget.GsmAutoAnswer.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GSM Call Check</string>
+    <string name="check_page_title">Call audio check</string>
+    <string name="check_page_subtitle">Check whether callers can hear audio from this phone.</string>
+    <string name="check_live_body">Start the test, then call this phone from another phone. The caller should hear a beep, then hold music.</string>
+    <string name="check_live_arm">Start 30-minute test</string>
+    <string name="check_live_disarm">Stop test</string>
+    <string name="check_live_not_run">Not tested yet.</string>
+</resources>

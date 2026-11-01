@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+        <activity
+            android:name=".ui.MainActivity"
+            tools:node="remove" />
+        <activity
+            android:name=".ui.AudioSettingsActivity"
+            tools:node="remove" />
+        <activity
+            android:name=".ui.CallFlowSettingsActivity"
+            tools:node="remove" />
+        <activity
+            android:name=".ui.DiagnosticsActivity"
+            tools:node="remove" />
+        <activity
+            android:name=".ui.SimSelectionActivity"
+            tools:node="remove" />
+        <activity
+            android:name=".ui.DialerActivity"
+            tools:node="remove" />
+
+        <activity
+            android:name=".ui.LiteMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -108,6 +108,13 @@ class DeviceCheckFragment : Fragment(R.layout.fragment_device_check) {
         evidenceToggle = view.findViewById(R.id.compat_evidence_toggle)
         reportBody = view.findViewById(R.id.compat_report_body)
 
+        if (resources.getBoolean(R.bool.lite_mode)) {
+            view.findViewById<View>(R.id.technical_card).isVisible = false
+            view.findViewById<View>(R.id.shizuku_card).isVisible = false
+            view.findViewById<View>(R.id.live_sim_divider).isVisible = false
+            view.findViewById<View>(R.id.live_sim_row).isVisible = false
+        }
+
         scanButton.setOnClickListener { runScan() }
         copyButton.setOnClickListener { copyReport() }
         shareButton.setOnClickListener { shareReport() }

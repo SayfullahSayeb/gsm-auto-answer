@@ -13,8 +13,20 @@ android {
         applicationId = "com.gsmautoanswer.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 6
-        versionName = "2.0.1"
+        versionCode = 7
+        versionName = "2.1.0"
+    }
+
+    flavorDimensions += "edition"
+
+    productFlavors {
+        create("full") {
+            dimension = "edition"
+        }
+        create("lite") {
+            dimension = "edition"
+            applicationId = "com.gsmautoanswer.lite"
+        }
     }
 
     signingConfigs {
