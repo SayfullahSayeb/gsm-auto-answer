@@ -46,30 +46,77 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
 
-      - name: Detect signing key
+      - name: Prepare signing key
         id: signing
         env:
-          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 || secrets.RELEASE_KEYSTORE }}
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          RELEASE_KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE }}
+          ANDROID_STORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          RELEASE_STORE_PASS: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          ANDROID_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          RELEASE_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          ANDROID_KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          RELEASE_KEY_PASS: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: |
-          if [ -n "$KEYSTORE_BASE64" ]; then
-            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
-            echo "signed=true" >> "$GITHUB_OUTPUT"
-            echo "Release signing key detected."
-          else
+          KEYSTORE_B64="${ANDROID_KEYSTORE_B64:-$RELEASE_KEYSTORE_B64}"
+          STORE_PASS="${ANDROID_STORE_PASS:-$RELEASE_STORE_PASS}"
+          ALIAS="${ANDROID_ALIAS:-$RELEASE_ALIAS}"
+          KEY_PASS="${ANDROID_KEY_PASS:-$RELEASE_KEY_PASS}"
+
+          # Tolerate values pasted together with their NAME= label.
+          KEYSTORE_B64="${KEYSTORE_B64#ANDROID_KEYSTORE_BASE64=}"
+          KEYSTORE_B64="${KEYSTORE_B64#RELEASE_KEYSTORE=}"
+          STORE_PASS="${STORE_PASS#ANDROID_KEYSTORE_PASSWORD=}"
+          STORE_PASS="${STORE_PASS#RELEASE_KEYSTORE_PASSWORD=}"
+          ALIAS="${ALIAS#ANDROID_KEY_ALIAS=}"
+          ALIAS="${ALIAS#RELEASE_KEY_ALIAS=}"
+          KEY_PASS="${KEY_PASS#ANDROID_KEY_PASSWORD=}"
+          KEY_PASS="${KEY_PASS#RELEASE_KEY_PASSWORD=}"
+
+          KEYSTORE_B64=$(printf '%s' "$KEYSTORE_B64" | tr -d '[:space:]')
+          STORE_PASS=$(printf '%s' "$STORE_PASS")
+          ALIAS=$(printf '%s' "$ALIAS" | tr -d '[:space:]')
+          KEY_PASS=$(printf '%s' "$KEY_PASS")
+
+          if [ -z "$KEYSTORE_B64" ]; then
             echo "signed=false" >> "$GITHUB_OUTPUT"
             echo "No release signing key configured; this run will use a debug build."
+            exit 0
           fi
+
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
+          if ! keytool -list -keystore "$RUNNER_TEMP/release.keystore" -storepass "$STORE_PASS" > "$RUNNER_TEMP/keystore-list.txt" 2> "$RUNNER_TEMP/keystore-error.txt"; then
+            echo "::error::The release keystore could not be opened. Check ANDROID_KEYSTORE_PASSWORD and make sure ANDROID_KEYSTORE_BASE64 contains only the base64 keystore data."
+            cat "$RUNNER_TEMP/keystore-error.txt"
+            exit 1
+          fi
+
+          if [ -z "$ALIAS" ] || ! keytool -list -alias "$ALIAS" -keystore "$RUNNER_TEMP/release.keystore" -storepass "$STORE_PASS" > /dev/null 2>&1; then
+            ALIAS=$(awk -F, '/PrivateKeyEntry/ {print $1; exit}' "$RUNNER_TEMP/keystore-list.txt" | tr -d '[:space:]')
+            echo "Configured key alias was missing or wrong; using the alias found in the keystore."
+          fi
+
+          if ! keytool -certreq -alias "$ALIAS" -keystore "$RUNNER_TEMP/release.keystore" -storepass "$STORE_PASS" -keypass "$KEY_PASS" > /dev/null 2> "$RUNNER_TEMP/key-error.txt"; then
+            echo "::error::The key password does not match the keystore alias. Check ANDROID_KEY_PASSWORD and ANDROID_KEY_ALIAS."
+            cat "$RUNNER_TEMP/key-error.txt"
+            exit 1
+          fi
+
+          {
+            echo "RELEASE_KEYSTORE_PATH=$RUNNER_TEMP/release.keystore"
+            echo "RELEASE_STORE_PASSWORD=$STORE_PASS"
+            echo "RELEASE_KEY_ALIAS=$ALIAS"
+            echo "RELEASE_KEY_PASSWORD=$KEY_PASS"
+          } >> "$GITHUB_ENV"
+
+          echo "signed=true" >> "$GITHUB_OUTPUT"
+          echo "Release signing key validated."
 
       - name: Run unit tests
         run: ./gradlew test
 
       - name: Build signed release APK
         if: steps.signing.outputs.signed == 'true'
-        env:
-          RELEASE_KEYSTORE_PATH: ${{ runner.temp }}/release.keystore
-          RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD || secrets.RELEASE_KEYSTORE_PASSWORD }}
-          RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS || secrets.RELEASE_KEY_ALIAS }}
-          RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD || secrets.RELEASE_KEY_PASSWORD }}
         run: ./gradlew assembleRelease
 
       - name: Restore debug keystore
