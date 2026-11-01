@@ -94,6 +94,9 @@ repository secrets under **Settings → Secrets and variables → Actions**:
 | `ANDROID_KEY_ALIAS` | Key alias |
 | `ANDROID_KEY_PASSWORD` | Key password |
 
+The workflow also accepts `RELEASE_KEYSTORE`, `RELEASE_KEYSTORE_PASSWORD`,
+`RELEASE_KEY_ALIAS` and `RELEASE_KEY_PASSWORD`.
+
 Keep the keystore and passwords backed up outside the repository. Without the
 secrets, the workflow attaches a debug-signed APK and a newer build may require
 uninstalling the previous version first.
